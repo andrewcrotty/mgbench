@@ -20,6 +20,7 @@ CREATE TABLE logs (
   swap_free float,
   bytes_in float,
   bytes_out float
+)
 WITH (
   number_of_replicas = 0,
   refresh_interval = 0
