@@ -1,5 +1,5 @@
 SELECT machine_name,
-       DATE_FORMAT('%Y-%m-%d', dt) AS dt,
+       dt,
        MIN(mem_free) AS min_mem_free
 FROM (
   SELECT machine_name,

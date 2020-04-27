@@ -3,7 +3,7 @@ SELECT machine_name,
        MIN(mem_free) AS min_mem_free
 FROM (
   SELECT machine_name,
-         CAST(log_time AS date) AS dt,
+         CAST(log_time AS DATE) AS dt,
          mem_free
   FROM logs
   WHERE machine_group = 'DMZ'

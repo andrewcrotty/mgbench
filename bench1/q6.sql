@@ -4,7 +4,7 @@ SELECT dt,
        SUM(net_out) AS total_out,
        SUM(net_in) + SUM(net_out) AS total_both
 FROM (
-  SELECT CAST(log_time AS date) AS dt,
+  SELECT CAST(log_time AS DATE) AS dt,
          EXTRACT(HOUR FROM log_time) AS hr,
          COALESCE(bytes_in, 0.0) / 1000000000.0 AS net_in,
          COALESCE(bytes_out, 0.0) / 1000000000.0 AS net_out

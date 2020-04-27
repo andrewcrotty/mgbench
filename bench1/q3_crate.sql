@@ -1,4 +1,4 @@
-SELECT DATE_FORMAT('%Y-%m-%d', dt) AS dt,
+SELECT dt,
        hr,
        AVG(load_fifteen) AS avg_load_fifteen,
        AVG(load_five) AS avg_load_five,

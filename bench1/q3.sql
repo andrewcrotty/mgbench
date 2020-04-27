@@ -6,7 +6,7 @@ SELECT dt,
        AVG(mem_free) AS avg_mem_free,
        AVG(swap_free) AS avg_swap_free
 FROM (
-  SELECT CAST(log_time AS date) AS dt,
+  SELECT CAST(log_time AS DATE) AS dt,
          EXTRACT(HOUR FROM log_time) AS hr,
          load_fifteen,
          load_five,
