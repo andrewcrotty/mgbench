@@ -3,9 +3,9 @@ A new analytical benchmark for machine-generated log data.
 
 ## Data
 
-1. **bench1:** https://drive.google.com/open?id=10hOPeR2YVpEI4YdwWjWwdYKyS6ArBwal
-2. **bench2:** https://drive.google.com/open?id=1-tvY4Y3DJunRQwKW6t5up4iJ2rGyuZty
-3. **bench3:** https://drive.google.com/open?id=1Ycax8vKiUIpQOAOtvVR4HVvakWj1fc4g
+1. **bench1:** http://cs.brown.edu/people/acrotty/mgbench/bench1.tar.gz
+2. **bench2:** http://cs.brown.edu/people/acrotty/mgbench/bench2.tar.gz
+3. **bench3:** http://cs.brown.edu/people/acrotty/mgbench/bench3.tar.gz
 
 ## Benchmark 1
 
