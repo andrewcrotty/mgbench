@@ -5,7 +5,7 @@ from pyspark.sql import SparkSession
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('filename')
-    group.add_argument('-q', '--query', nargs='+')
+    parser.add_argument('-q', '--query', nargs='+')
     args = parser.parse_args()
 
     spark = SparkSession.builder.appName('mgbench').getOrCreate()
