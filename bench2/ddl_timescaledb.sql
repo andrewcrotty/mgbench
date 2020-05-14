@@ -7,3 +7,8 @@ CREATE TABLE logs (
 );
 
 SELECT CREATE_HYPERTABLE('logs', 'log_time');
+
+CREATE INDEX idx_client_ip ON logs (client_ip);
+CREATE INDEX idx_request ON logs (request);
+CREATE INDEX idx_status_code ON logs (status_code);
+CREATE INDEX idx_object_size ON logs (object_size);

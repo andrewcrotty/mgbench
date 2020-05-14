@@ -22,7 +22,7 @@ CREATE TABLE logs (
   bytes_out     FLOAT
 );
 
-SELECT CREATE_HYPERTABLE('logs', 'log_time');
+CREATE INDEX idx_log_time ON logs (log_time);
 
 CREATE INDEX idx_machine_name ON logs (machine_name);
 CREATE INDEX idx_machine_group ON logs (machine_group);
