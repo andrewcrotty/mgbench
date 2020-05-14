@@ -20,7 +20,7 @@ FROM (
     AND load_one IS NOT NULL
     AND mem_free IS NOT NULL
     AND swap_free IS NOT NULL
-    AND log_time >= '2017-01-01'
+    AND log_time >= DATE '2017-01-01'
 ) AS r
 GROUP BY dt,
          hr

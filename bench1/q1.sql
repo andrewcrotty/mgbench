@@ -15,6 +15,6 @@ FROM (
          COALESCE(bytes_out, 0.0) AS net_out
   FROM logs
   WHERE machine_name IN ('anansi','aragog','urd')
-    AND log_time >= '2017-01-11 00:00:00'
+    AND log_time >= TIMESTAMP '2017-01-11 00:00:00'
 ) AS r
 GROUP BY machine_name;

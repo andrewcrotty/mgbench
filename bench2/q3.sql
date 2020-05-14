@@ -9,7 +9,7 @@ FROM (
     FROM logs
     WHERE status_code >= 200
       AND status_code < 300
-      AND log_time >= '2012-12-01'
+      AND log_time >= DATE '2012-12-01'
   ) AS r
   WHERE len > 0
 ) AS s
