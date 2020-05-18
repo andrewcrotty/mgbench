@@ -18,9 +18,6 @@ A new analytical benchmark for machine-generated log data.
 | Druid        |  |  |  |  |  |  |  |
 | Hyper        | 32.561     | 0.029     | 0.023     | 0.029     | 0.025     | 0.026     | 0.054     |
 | MonetDB      | **31.042** | 0.021     | 0.007     | 0.025     | **0.012** | **0.018** | 0.180     |
-| MySQL        |  |  |  |  |  |  |  |
-|  +Index Time |  |  |  |  |  |  |  |
-|  +Index All  |  |  |  |  |  |  |  |
 | PostgreSQL   | 133.738    | 0.879     | 0.766     | 0.958     | 0.868     | 1.198     | 2.574     |
 |  +Index Time | 145.596    | 0.876     | 0.765     | 0.958     | 1.292     | 1.202     | 2.575     |
 |  +Index All  | 403.432    | 0.129     | 0.005     | 0.047     | 0.563     | 1.501     | 0.457     |
@@ -37,9 +34,6 @@ A new analytical benchmark for machine-generated log data.
 | Druid        |  |  |  |  |  |  |  |
 | Hyper        | **26.421** | 0.049     | 0.056     | N/A       | **0.061** | **0.208** | 0.390     |
 | MonetDB      | 26.446     | 0.012     | **0.052** | 3.233     | 0.150     | 0.828     | 2.262     |
-| MySQL        |  |  |  |  |  |  |  |
-|  +Index Time |  |  |  |  |  |  |  |
-|  +Index All  |  |  |  |  |  |  |  |
 | PostgreSQL   | 145.774    | 1.123     | 1.866     | 2.019     | 2.044     | 54.801    | 17.835    |
 |  +Index Time | 213.160    | 0.287     | 0.174     | **1.124** | 2.042     | 53.386    | 17.835    |
 |  +Index All  | 610.496    | 0.281     | 2.172     | 4.099     | 2.043     | 53.389    | 17.834    |
@@ -56,9 +50,6 @@ A new analytical benchmark for machine-generated log data.
 | Druid        |  |  |  |  |  |  |  |
 | Hyper        |  |  |  |  |  |  |  |
 | MonetDB      |  |  |  |  |  |  |  |
-| MySQL        |  |  |  |  |  |  |  |
-|  +Index Time |  |  |  |  |  |  |  |
-|  +Index All  |  |  |  |  |  |  |  |
 | PostgreSQL   |  |  |  |  |  |  |  |
 |  +Index Time |  |  |  |  |  |  |  |
 |  +Index All  |  |  |  |  |  |  |  |
