@@ -137,7 +137,8 @@ class SparkSQL:
         self.ts_fmt = 'yyyy-MM-dd HH:mm:ss'
 
     def create(self, sql):
-        self.ddl = sql
+        self.ddl = sql.split('(')[1].split(')')[0]
+        return []
 
     def load(self, filename):
         self.spark.read.csv(filename, schema=self.ddl, header=True,
