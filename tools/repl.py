@@ -147,7 +147,7 @@ class SparkSQL:
         return [count]
 
     def query(self, sql):
-        result = self.spark.sql(sql).collect()
+        result = self.spark.sql(sql.replace(';', '')).collect()
         return result
 
 
@@ -176,27 +176,26 @@ def main():
     while True:
         try:
             input = session.prompt('mgbench> ').strip().lower()
+            if input[:4] == 'load':
+                run(lambda: system.load(input.split()[1]))
+            else:
+                if input[:3] == 'run':
+                    with open(input.split()[1]) as f:
+                        sql = f.read().strip().lower()
+                else:
+                    sql = input
+
+                print(sql)
+                if sql[:6] == 'create':
+                    run(lambda: system.create(sql))
+                else:
+                    run(lambda: system.query(sql))
         except KeyboardInterrupt:
             continue
         except EOFError:
             break
-
-        #print(input)
-
-        if input[:4] == 'load':
-            run(lambda: system.load(input.split()[1]))
-        else:
-            if input[:3] == 'run':
-                with open(input.split()[1]) as f:
-                    sql = f.read().strip().lower()
-            else:
-                sql = input
-
-            print(sql)
-            if sql[:6] == 'create':
-                run(lambda: system.create(sql))
-            else:
-                run(lambda: system.query(sql))
+        except:
+            print(sys.exc_info()[0])
 
 
 if __name__ == '__main__':
