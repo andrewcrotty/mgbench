@@ -143,11 +143,12 @@ class SparkSQL:
     def load(self, filename):
         self.spark.read.csv(filename, schema=self.ddl, header=True,
                 timestampFormat=self.ts_fmt).createOrReplaceTempView('logs')
-        count = spark.sql('SELECT COUNT(*) FROM logs')
+        count = self.spark.sql('SELECT COUNT(*) FROM logs')
         return [count]
 
     def query(self, sql):
         result = spark.sql(sql)
+        print(result)
 
 
 def run(cmd):
