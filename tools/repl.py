@@ -132,7 +132,7 @@ class Hyper:
 
 class SparkSQL:
     def __init__(self):
-        self.spark = SparkSession.builder.appName('mgbench').getOrCreate()
+        self.spark = SparkSession.builder.master('local[48]').getOrCreate()
         self.ddl = None
         self.ts_fmt = 'yyyy-MM-dd HH:mm:ss'
 
