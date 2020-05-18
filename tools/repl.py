@@ -148,7 +148,7 @@ class SparkSQL:
 
     def query(self, sql):
         result = self.spark.sql(sql).collect()
-        print(result)
+        return result
 
 
 def run(cmd):
