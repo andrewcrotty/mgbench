@@ -81,6 +81,20 @@ class Druid(System):
         spec = {
             'type': 'index_parallel',
             'spec': {
+                'dataSchema': {
+                    'dataSource': 'logs',
+                    'timestampSpec': {
+                        'column': 'log_time'
+                    },
+                    'dimensionSpec': {
+                        'dimensions': self.ddl
+                    },
+                    'metricSpec': [],
+                    'granularitySpec': {
+                        'type': 'arbitrary',
+                        'rollup': 'false'
+                    }
+                },
                 'ioconfig': {
                     'type': 'index_parallel',
                     'inputSource': {
@@ -92,17 +106,6 @@ class Druid(System):
                         'type': 'csv',
                         'findColumnsFromHeader': True
                     }
-                },
-                'dataSchema': {
-                    'dataSource': 'logs',
-                    'timestampSpec': {
-                        'column': 'log_time'
-                    },
-                    'dimensionSpec': {
-                        'dimensions': self.ddl
-                    },
-                    'metricSpec': [],
-                    'granularitySpec': {}
                 },
                 'tuningConfig': {
                     'type': 'index_parallel',
