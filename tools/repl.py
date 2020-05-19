@@ -120,7 +120,7 @@ class Druid(System):
         }
         print(json.dumps(spec))
         response = requests.post('http://localhost:8081/druid/indexer/v1/task', json=spec)
-        print(response.content)
+        print(json.dumps(response.json()))
         return []
 
     def query(self, sql):
