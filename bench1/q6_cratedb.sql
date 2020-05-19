@@ -1,4 +1,4 @@
-SELECT DATE_FORMAT('%Y-%m-%d', dt) AS dt,
+SELECT dt,
        hr,
        SUM(net_in) AS total_in,
        SUM(net_out) AS total_out,
