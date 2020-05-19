@@ -9,6 +9,8 @@ A new analytical benchmark for machine-generated log data.
 
 ## Preliminary Results
 
+All experiments were conducted on a `r5.12xlarge` EC2 instance (48 vCPU, 384 GiB memory).
+
 ### Benchmark 1
 
 | System       | Load       | Q1        | Q2        | Q3        | Q4        | Q5        | Q6        |
@@ -32,14 +34,14 @@ A new analytical benchmark for machine-generated log data.
 | ClickHouse   | 32.006     | 0.032     | 0.116     | N/A       | 0.067     | 0.238     | **0.345** |
 | CrateDB      | N/A        | 0.009     | 0.089     | 3.699     | 1.789     | 13.619    | 11.282    |
 | Druid        |  |  |  |  |  |  |  |
-| Hyper        | 26.421     | 0.049     | 0.056     | N/A       | **0.061** | **0.208** | 0.390     |
+| Hyper        | 26.421     | 0.049     | 0.056     | **0.051** | **0.061** | **0.208** | 0.390     |
 | MonetDB      | 26.446     | 0.012     | **0.052** | 3.233     | 0.150     | 0.828     | 2.262     |
 | PostgreSQL   | 145.774    | 1.123     | 1.866     | 2.019     | 2.044     | 54.801    | 17.835    |
-|  +Index Time | 213.160    | 0.287     | 0.174     | **1.124** | 2.042     | 53.386    | 17.835    |
+|  +Index Time | 213.160    | 0.287     | 0.174     | 1.124     | 2.042     | 53.386    | 17.835    |
 |  +Index All  | 610.496    | 0.281     | 2.172     | 4.099     | 2.043     | 53.389    | 17.834    |
 | SparkSQL     | **4.167**  | 14.850    | 7.542     | N/A       | 6.158     | 6.671     | 6.929     |
-| TimescaleDB  | 276.865    | 0.080     | 0.125     | N/A       | 1.451     | 57.758    | 17.376    |
-|  +Index All  | 522.875    | **0.001** | 0.117     | N/A       | 1.449     | 57.694    | 17.374    |
+| TimescaleDB  | 276.865    | 0.073     | 0.112     | 1.021     | 1.442     | 57.758    | 17.376    |
+|  +Index All  | 522.875    | **0.001** | 0.117     | 1.017     | 1.447     | 57.694    | 17.374    |
 
 ### Benchmark 3
 
