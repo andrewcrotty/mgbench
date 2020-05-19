@@ -47,8 +47,8 @@ class Druid(System):
 
     def create(self, sql):
         self.ddl = [
-            {'name': 'machine_name', 'createBitmapIndex': index},
-            {'name': 'machine_group', 'createBitmapIndex': index},
+            {'name': 'machine_name', 'createBitmapIndex': self.index},
+            {'name': 'machine_group', 'createBitmapIndex': self.index},
             {'name': 'cpu_idle', 'type': 'float'},
             {'name': 'cpu_nice', 'type': 'float'},
             {'name': 'cpu_system', 'type': 'float'},
@@ -99,7 +99,7 @@ class Druid(System):
                         'column': 'log_time'
                     },
                     'dimensionSpec': {
-                        'dimensions': bench
+                        'dimensions': self.ddl
                     },
                     'metricSpec': [],
                     'granularitySpec': {}
