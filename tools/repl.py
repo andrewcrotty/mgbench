@@ -111,6 +111,8 @@ class Druid(System):
                 },
                 'tuningConfig': {
                     'type': 'index_parallel',
+                    'maxRowsInMemory': 1000000000,
+                    'maxBytesInMemory': -1,
                     'maxNumConcurrentSubTasks': self.parallel,
                     'indexSpec': {
                         'bitmap': {'type': self.bitmap},
@@ -126,7 +128,18 @@ class Druid(System):
         return []
 
     def query(self, sql):
-        pass
+        query = {
+            'query': sql,
+            'context': {
+                'useCache': False,
+                'populateCache': False,
+                'useResultLevelCache': False,
+                'populateResultLevelCache': False,
+                'vectorize': True
+            }
+        }
+        response = requests.post('http://localhost:8888/druid/v2/sql', json=spec)
+        return response
 
 
 class Hyper(System):
