@@ -1,5 +1,6 @@
 import argparse
 import json
+import requests
 import sys
 import time
 from prompt_toolkit import PromptSession
@@ -13,7 +14,7 @@ from tableauhyperapi import CreateMode
 from tableauhyperapi import HyperProcess
 from tableauhyperapi import Telemetry
 
-cmds = WordCompleter(['load', 'run'])
+#cmds = WordCompleter(['load', 'run'])
 
 """
 style = Style.from_dict({
@@ -24,31 +25,68 @@ style = Style.from_dict({
 })
 """
 
-class Druid:
+
+class System:
+    def create(self, sql):
+        raise NotImplementedError
+
+    def load(self, filename):
+        raise NotImplementedError
+
+    def query(self, sql):
+        raise NotImplementedError
+
+
+class Druid(System):
     def __init__(self):
-        pass
+        self.parallel = 48
+        self.index = True
+        self.bitmap = 'concise' #concise, roaring
+        self.compress = 'uncompressed' #uncompressed, lz4, lzf
+        self.encode = 'longs' #longs, auto
 
-    def create(self):
-        pass
+    def create(self, sql):
+        self.ddl = [
+            {'name': 'machine_name', 'createBitmapIndex': index},
+            {'name': 'machine_group', 'createBitmapIndex': index},
+            {'name': 'cpu_idle', 'type': 'float'},
+            {'name': 'cpu_nice', 'type': 'float'},
+            {'name': 'cpu_system', 'type': 'float'},
+            {'name': 'cpu_user', 'type': 'float'},
+            {'name': 'cpu_wio', 'type': 'float'},
+            {'name': 'disk_free', 'type': 'float'},
+            {'name': 'disk_total', 'type': 'float'},
+            {'name': 'part_max_used', 'type': 'float'},
+            {'name': 'load_fifteen', 'type': 'float'},
+            {'name': 'load_five', 'type': 'float'},
+            {'name': 'load_one', 'type': 'float'},
+            {'name': 'mem_buffers', 'type': 'float'},
+            {'name': 'mem_cached', 'type': 'float'},
+            {'name': 'mem_free', 'type': 'float'},
+            {'name': 'mem_shared', 'type': 'float'},
+            {'name': 'swap_free', 'type': 'float'},
+            {'name': 'bytes_in', 'type': 'float'},
+            {'name': 'bytes_out', 'type': 'float'}
+        ]
+        """
+        {'name': 'client_ip', 'createBitmapIndex': index},
+        {'name': 'request', 'createBitmapIndex': index},
+        {'name': 'status_code', 'type': 'long'},
+        {'name': 'object_size', 'type': 'long'}
+        """
+        return []
 
-    #load(dir, filename, bench, parallel, bitmap, compress, encode):
-    def load(self):
-        dir = ''
-        filename = ''
-        bench = ''
-        parallel = ''
-        bitmap = ''
-        compress = ''
-        encode = ''
-        ddl = {
+    def load(self, filename):
+        dir, filter = filename.rsplit('/', 1)
+        spec = {
             'type': 'index_parallel',
             'spec': {
                 'ioconfig': {
                     'type': 'index_parallel',
                     'inputSource': {
                         'type': 'local',
-                        'baseDir': dir,
-                        'filter': filename
+                        'baseDir': dir + '/',
+                        'filter': filter
                     },
                     'inputFormat': {
                         'type': 'csv',
@@ -68,50 +106,23 @@ class Druid:
                 },
                 'tuningConfig': {
                     'type': 'index_parallel',
-                    'maxNumConcurrentSubTasks': parallel,
+                    'maxNumConcurrentSubTasks': self.parallel,
                     'indexSpec': {
-                        'bitmap': {'type': bitmap},
-                        'dimensionCompression': compress,
-                        'longEncoding': encode
+                        'bitmap': {'type': self.bitmap},
+                        'dimensionCompression': self.compress,
+                        'longEncoding': self.encode
                     }
                 }
             }
         }
+        requests.post('http://localhost:8081/druid/indexer/v1/task', json=spec)
+        return []
 
-    def query(self):
+    def query(self, sql):
         pass
 
-"""
-{'name': 'machine_name', 'createBitmapIndex': index},
-{'name': 'machine_group', 'createBitmapIndex': index},
-{'name': 'cpu_idle', 'type': 'float'},
-{'name': 'cpu_nice', 'type': 'float'},
-{'name': 'cpu_system', 'type': 'float'},
-{'name': 'cpu_user', 'type': 'float'},
-{'name': 'cpu_wio', 'type': 'float'},
-{'name': 'disk_free', 'type': 'float'},
-{'name': 'disk_total', 'type': 'float'},
-{'name': 'part_max_used', 'type': 'float'},
-{'name': 'load_fifteen', 'type': 'float'},
-{'name': 'load_five', 'type': 'float'},
-{'name': 'load_one', 'type': 'float'},
-{'name': 'mem_buffers', 'type': 'float'},
-{'name': 'mem_cached', 'type': 'float'},
-{'name': 'mem_free', 'type': 'float'},
-{'name': 'mem_shared', 'type': 'float'},
-{'name': 'swap_free', 'type': 'float'},
-{'name': 'bytes_in', 'type': 'float'},
-{'name': 'bytes_out', 'type': 'float'}
-"""
 
-"""
-{'name': 'client_ip', 'createBitmapIndex': index},
-{'name': 'request', 'createBitmapIndex': index},
-{'name': 'status_code', 'type': 'long'},
-{'name': 'object_size', 'type': 'long'}
-"""
-
-class Hyper:
+class Hyper(System):
     def __init__(self, filename):
         self.db = HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU)
         self.conn = Connection(self.db.endpoint, filename, CreateMode.CREATE)
@@ -128,10 +139,8 @@ class Hyper:
         #schema = result.schema()
         return self.conn.execute_query(sql)
 
-#def load(hyper, dbfile, ddlfile, infile):
-#def query(hyper, dbfile, queries):
 
-class SparkSQL:
+class SparkSQL(System):
     def __init__(self):
         self.spark = SparkSession.builder.master('local[48]').getOrCreate()
         self.ddl = None
@@ -167,13 +176,13 @@ def main():
     args = parser.parse_args()
 
     if args.system == 'druid':
-        print('Druid!')
+        system = Druid()
     elif args.system == 'hyper':
         system = Hyper('db.hyper')
     elif args.system == 'sparksql':
         system = SparkSQL()
 
-    session = PromptSession(lexer=PygmentsLexer(SqlLexer), completer=cmds)
+    session = PromptSession(lexer=PygmentsLexer(SqlLexer))
     while True:
         try:
             input = session.prompt('mgbench> ').strip().lower()
