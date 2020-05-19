@@ -84,13 +84,12 @@ class Druid(System):
                 'dataSchema': {
                     'dataSource': 'logs',
                     'timestampSpec': {
-                        'column': 'log_time',
-                        'format': 'auto'
+                        'column': 'log_time'
                     },
-                    'dimensionSpec': {
+                    'dimensionsSpec': {
                         'dimensions': self.ddl
                     },
-                    'metricSpec': [],
+                    'metricsSpec': [],
                     'granularitySpec': {
                         'type': 'arbitrary',
                         'rollup': 'false'
@@ -106,8 +105,7 @@ class Druid(System):
                     'inputFormat': {
                         'type': 'csv',
                         'findColumnsFromHeader': True
-                    },
-                    'appendToExisting': False
+                    }
                 },
                 'tuningConfig': {
                     'type': 'index_parallel',
