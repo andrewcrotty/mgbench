@@ -8,7 +8,7 @@ from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.styles import Style
 from pygments.lexers.sql import SqlLexer
-from pyspark.sql import SparkSession
+#from pyspark.sql import SparkSession
 from tableauhyperapi import Connection
 from tableauhyperapi import CreateMode
 from tableauhyperapi import HyperProcess
@@ -115,7 +115,8 @@ class Druid(System):
                 }
             }
         }
-        requests.post('http://localhost:8081/druid/indexer/v1/task', json=spec)
+        response = requests.post('http://localhost:8081/druid/indexer/v1/task', json=spec)
+        print(response.content)
         return []
 
     def query(self, sql):
