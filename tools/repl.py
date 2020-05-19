@@ -95,7 +95,7 @@ class Druid(System):
                         'rollup': 'false'
                     }
                 },
-                'ioconfig': {
+                'ioConfig': {
                     'type': 'index_parallel',
                     'inputSource': {
                         'type': 'local',
