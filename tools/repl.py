@@ -1,5 +1,6 @@
 import argparse
 import json
+import sys
 import time
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
