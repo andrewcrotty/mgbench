@@ -91,8 +91,10 @@ class Druid(System):
                     },
                     'metricsSpec': [],
                     'granularitySpec': {
-                        'type': 'arbitrary',
-                        'rollup': 'false'
+                        'rollup': 'false',
+                        'intervals': [
+                            '2016-11-01/2017-01-12'
+                        ]
                     }
                 },
                 'ioConfig': {
