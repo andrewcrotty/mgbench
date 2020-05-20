@@ -1,3 +1,3 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install postgresql-12
+sudo apt-get install -y postgresql-12
