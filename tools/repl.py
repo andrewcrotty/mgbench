@@ -178,7 +178,7 @@ class SparkSQL(System):
         return [count]
 
     def query(self, sql):
-        result = self.spark.sql(sql.replace(';', '')).collect()
+        result = self.spark.sql(sql).collect()
         return result
 
 
@@ -206,18 +206,18 @@ def main():
     session = PromptSession(lexer=PygmentsLexer(SqlLexer))
     while True:
         try:
-            input = session.prompt('mgbench> ').strip().lower()
-            if input[:4] == 'load':
+            input = session.prompt('mgbench> ').strip()
+            if input[:4].lower() == 'load':
                 run(lambda: system.load(input.split()[1]))
             else:
-                if input[:3] == 'run':
+                if input[:3].lower() == 'run':
                     with open(input.split()[1]) as f:
-                        sql = f.read().strip().lower()
+                        sql = f.read()
                 else:
                     sql = input
+                sql = sql.strip().replace(';', '')
 
-                print(sql)
-                if sql[:6] == 'create':
+                if sql[:6].lower() == 'create':
                     run(lambda: system.create(sql))
                 else:
                     run(lambda: system.query(sql))
