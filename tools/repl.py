@@ -138,7 +138,7 @@ class Druid(System):
             }
         }
         print(json.dumps(query))
-        response = requests.post('http://localhost:8888/druid/v2/sql', json=spec)
+        response = requests.post('http://localhost:8888/druid/v2/sql', json=query)
         print(json.dumps(response.json()))
         return response
 
