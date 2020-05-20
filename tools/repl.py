@@ -46,8 +46,9 @@ class Druid(System):
         self.encode = 'longs' #longs, auto
 
     def create(self, sql):
-        self.ddl = [
         """
+        self.ddl = [
+
             {'name': 'machine_name', 'createBitmapIndex': self.index},
             {'name': 'machine_group', 'createBitmapIndex': self.index},
             {'name': 'cpu_idle', 'type': 'float'},
@@ -70,8 +71,9 @@ class Druid(System):
             {'name': 'bytes_out', 'type': 'float'}
         ]
         """
-        {'name': 'client_ip', 'createBitmapIndex': self.index},
-        {'name': 'request', 'createBitmapIndex': self.index},
+        self.ddl = [
+        {'name': 'client_ip', 'createBitmapIndex': index},
+        {'name': 'request', 'createBitmapIndex': index},
         {'name': 'status_code', 'type': 'long'},
         {'name': 'object_size', 'type': 'long'}
         ]
