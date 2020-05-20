@@ -72,8 +72,8 @@ class Druid(System):
         ]
         """
         self.ddl = [
-        {'name': 'client_ip', 'createBitmapIndex': index},
-        {'name': 'request', 'createBitmapIndex': index},
+        {'name': 'client_ip', 'createBitmapIndex': self.index},
+        {'name': 'request', 'createBitmapIndex': self.index},
         {'name': 'status_code', 'type': 'long'},
         {'name': 'object_size', 'type': 'long'}
         ]
