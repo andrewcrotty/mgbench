@@ -137,7 +137,9 @@ class Druid(System):
                 'vectorize': True
             }
         }
+        print(json.dumps(query))
         response = requests.post('http://localhost:8888/druid/v2/sql', json=spec)
+        print(json.dumps(response.json()))
         return response
 
 
