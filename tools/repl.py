@@ -96,7 +96,8 @@ class Druid(System):
                     'granularitySpec': {
                         'rollup': 'false',
                         'intervals': [
-                            '2016-11-01/2017-01-12'
+                            #'2016-11-01/2017-01-12'
+                            '2011-12-31/2013-01-01'
                         ]
                     }
                 },
