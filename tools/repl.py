@@ -111,8 +111,7 @@ class Druid(System):
                 },
                 'tuningConfig': {
                     'type': 'index_parallel',
-                    'maxRowsInMemory': 1000000000,
-                    'maxBytesInMemory': -1,
+                    'maxRowsInMemory': 100000000,
                     'maxNumConcurrentSubTasks': self.parallel,
                     'indexSpec': {
                         'bitmap': {'type': self.bitmap},
