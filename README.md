@@ -50,11 +50,11 @@ All experiments were conducted on a `r5.12xlarge` EC2 instance (48 vCPU, 384 GiB
 | ClickHouse   |  |  |  |  |  |  |  |
 | CrateDB      |  |  |  |  |  |  |  |
 | Druid        |  |  |  |  |  |  |  |
-| Hyper        |  |  |  |  |  |  |  |
-| MonetDB      |  |  |  |  |  |  |  |
-| PostgreSQL   |  |  |  |  |  |  |  |
-|  +Index Time |  |  |  |  |  |  |  |
-|  +Index All  |  |  |  |  |  |  |  |
+| Hyper        | 51.877     | 0.032     | 0.036     | 0.027     | 0.024     | 0.049     | 0.197     |
+| MonetDB      | 34.871     | 0.104     | 4.099     | 0.042     | 0.043     | 0.081     | 18.873    |
+| PostgreSQL   | 242.270    | 3.257     | 255.778   | 3.771     | 3.096     | 3.873     | 42.745    |
+|  +Index Time | 310.320    | 0.127     | 254.876   | 3.803     | 3.095     | 3.891     | 42.744    |
+|  +Index All  | 824.136    | 0.049     | 255.661   | 0.466     | 3.080     | 1.301     | 45.186    |
 | SparkSQL     |  |  |  |  |  |  |  |
 | TimescaleDB  |  |  |  |  |  |  |  |
 |  +Index All  |  |  |  |  |  |  |  |
