@@ -1,7 +1,7 @@
 CREATE TABLE logs (
   log_time      TIMESTAMP NOT NULL,
-  machine_name  STRING NOT NULL,
-  machine_group STRING NOT NULL,
+  machine_name  TEXT NOT NULL,
+  machine_group TEXT NOT NULL,
   cpu_idle      FLOAT,
   cpu_nice      FLOAT,
   cpu_system    FLOAT,
