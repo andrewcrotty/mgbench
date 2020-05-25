@@ -178,6 +178,7 @@ class SparkSQL(System):
     def load(self, filename):
         self.spark.read.csv(filename, schema=self.ddl, header=True,
                 timestampFormat=self.ts_fmt).createOrReplaceTempView('logs')
+        self.spark.catalog.cacheTable('logs')
         count = self.spark.sql('SELECT COUNT(*) FROM logs').collect()
         return [count]
 
