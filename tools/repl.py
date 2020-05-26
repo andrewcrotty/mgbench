@@ -1,7 +1,6 @@
 import argparse
 import json
 import requests
-import sys
 import time
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
@@ -230,8 +229,8 @@ def main():
             continue
         except EOFError:
             break
-        except:
-            print(sys.exc_info()[0])
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':
