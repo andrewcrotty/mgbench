@@ -17,7 +17,7 @@ WITH room_use AS (
       FROM logs
       WHERE device_name LIKE 'room%'
         AND event_type = 'motion_start'
-        AND log_time >= TIMESTAMP '2019-09-01'
+        AND log_time >= TIMESTAMP '2019-09-01 00:00:00'
     ) AS r
     WHERE dow IN (1,2,3,4,5)
       AND hr BETWEEN 9 AND 16

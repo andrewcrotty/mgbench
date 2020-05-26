@@ -12,7 +12,7 @@ WITH power_hourly AS (
          event_value
   FROM logs
   WHERE event_type = 'power'
-    AND log_time >= TIMESTAMP '2019-11-01'
+    AND log_time >= TIMESTAMP '2019-11-01 00:00:00'
 )
 SELECT hr,
        device_id,
