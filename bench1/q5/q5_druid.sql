@@ -1,6 +1,6 @@
 SELECT machine_name,
        dt,
-       MIN(mem_free) AS min_mem_free
+       MIN(mem_free) AS mem_free_min
 FROM (
   SELECT machine_name,
          CAST(__time AS DATE) AS dt,

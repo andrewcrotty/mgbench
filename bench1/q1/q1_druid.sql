@@ -1,13 +1,13 @@
 SELECT machine_name,
-       MIN(cpu) AS min_cpu,
-       MAX(cpu) AS max_cpu,
-       AVG(cpu) AS avg_cpu,
-       MIN(net_in) AS min_net_in,
-       MAX(net_in) AS max_net_in,
-       AVG(net_in) AS avg_net_in,
-       MIN(net_out) AS min_net_out,
-       MAX(net_out) AS max_net_out,
-       AVG(net_out) AS avg_net_out
+       MIN(cpu) AS cpu_min,
+       MAX(cpu) AS cpu_max,
+       AVG(cpu) AS cpu_avg,
+       MIN(net_in) AS net_in_min,
+       MAX(net_in) AS net_in_max,
+       AVG(net_in) AS net_in_avg,
+       MIN(net_out) AS net_out_min,
+       MAX(net_out) AS net_out_max,
+       AVG(net_out) AS net_out_avg
 FROM (
   SELECT machine_name,
          COALESCE(cpu_user, 0.0) AS cpu,

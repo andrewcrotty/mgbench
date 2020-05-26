@@ -1,8 +1,8 @@
 SELECT dt,
        hr,
-       SUM(net_in) AS total_in,
-       SUM(net_out) AS total_out,
-       SUM(net_in) + SUM(net_out) AS total_both
+       SUM(net_in) AS net_in_sum,
+       SUM(net_out) AS net_out_sum,
+       SUM(net_in) + SUM(net_out) AS both_sum
 FROM (
   SELECT CAST(log_time AS DATE) AS dt,
          EXTRACT(HOUR FROM log_time) AS hr,
@@ -17,5 +17,5 @@ FROM (
 ) AS r
 GROUP BY dt,
          hr
-ORDER BY total_both DESC
+ORDER BY both_sum DESC
 LIMIT 10;

@@ -1,10 +1,10 @@
 SELECT top_level,
        AVG(LENGTH(request) - LENGTH(REPLACE(request, '/', ''))) AS depth
 FROM (
-  SELECT SUBSTRING(request FROM 0 FOR len + 1) AS top_level,
+  SELECT SUBSTRING(request, 1, len) AS top_level,
          request
   FROM (
-    SELECT POSITION('/' IN SUBSTRING(request FROM 2)) AS len,
+    SELECT POSITION('/' IN SUBSTRING(request, 2)) AS len,
            request
     FROM logs
     WHERE status_code >= 200

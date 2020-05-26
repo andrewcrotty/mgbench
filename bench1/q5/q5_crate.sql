@@ -1,6 +1,6 @@
 SELECT machine_name,
        dt,
-       MIN(mem_free) AS min_mem_free
+       MIN(mem_free) AS mem_free_min
 FROM (
   SELECT machine_name,
          DATE_TRUNC('day', log_time) AS dt,

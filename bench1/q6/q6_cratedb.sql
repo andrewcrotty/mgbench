@@ -1,8 +1,8 @@
 SELECT dt,
        hr,
-       SUM(net_in) AS total_in,
-       SUM(net_out) AS total_out,
-       SUM(net_in) + SUM(net_out) AS total_both
+       SUM(net_in) AS net_in_sum,
+       SUM(net_out) AS net_out_sum,
+       SUM(net_in) + SUM(net_out) AS both_sum
 FROM (
   SELECT DATE_TRUNC('day', log_time) AS dt,
          EXTRACT(HOUR FROM log_time) AS hr,
