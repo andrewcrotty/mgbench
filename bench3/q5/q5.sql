@@ -45,5 +45,5 @@ SELECT DISTINCT device_name,
        device_floor,
        'SUMMER'
 FROM temperature
-WHERE dt >= TIMESTAMP '2019-06-01 00:00:00'
-  AND dt < TIMESTAMP '2019-09-01 00:00:00';
+WHERE dt >= DATE '2019-06-01'
+  AND dt < DATE '2019-09-01';

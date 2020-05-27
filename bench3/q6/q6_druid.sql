@@ -18,10 +18,10 @@ FROM (
          AVG(projector) AS projector_hourly_avg,
          AVG(vending) AS vending_hourly_avg
   FROM (
-    SELECT CAST(log_time AS DATE) AS dt,
-           EXTRACT(YEAR FROM log_time) AS yr,
-           EXTRACT(MONTH FROM log_time) AS mo,
-           EXTRACT(HOUR FROM log_time) AS hr,
+    SELECT CAST(__time AS DATE) AS dt,
+           EXTRACT(YEAR FROM __time) AS yr,
+           EXTRACT(MONTH FROM __time) AS mo,
+           EXTRACT(HOUR FROM __time) AS hr,
            CASE WHEN device_name LIKE 'coffee%' THEN event_value ELSE 0 END AS coffee,
            CASE WHEN device_name LIKE 'printer%' THEN event_value ELSE 0 END AS printer,
            CASE WHEN device_name LIKE 'projector%' THEN event_value ELSE 0 END AS projector,
