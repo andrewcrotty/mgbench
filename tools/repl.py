@@ -92,8 +92,8 @@ class Druid(System):
                 }
             }
         }
-        print(json.dumps(self.spec))
-        response = requests.post(Druid.LOAD_URL, json=self.spec)
+        print(json.dumps(spec))
+        response = requests.post(Druid.LOAD_URL, json=spec)
         print(json.dumps(response.json()))
         return []
 
