@@ -1,0 +1,27 @@
+{
+    "dimensions": [
+        {"name": "machine_name", "type": "string"},
+        {"name": "machine_group", "type": "string"},
+        {"name": "cpu_idle", "type": "float"},
+        {"name": "cpu_nice", "type": "float"},
+        {"name": "cpu_system", "type": "float"},
+        {"name": "cpu_user", "type": "float"},
+        {"name": "cpu_wio", "type": "float"},
+        {"name": "disk_free", "type": "float"},
+        {"name": "disk_total", "type": "float"},
+        {"name": "part_max_used", "type": "float"},
+        {"name": "load_fifteen", "type": "float"},
+        {"name": "load_five", "type": "float"},
+        {"name": "load_one", "type": "float"},
+        {"name": "mem_buffers", "type": "float"},
+        {"name": "mem_cached", "type": "float"},
+        {"name": "mem_free", "type": "float"},
+        {"name": "mem_shared", "type": "float"},
+        {"name": "swap_free", "type": "float"},
+        {"name": "bytes_in", "type": "float"},
+        {"name": "bytes_out", "type": "float"}
+    ],
+    "intervals": [
+        "2016-11-01/2017-01-12"
+    ]
+}

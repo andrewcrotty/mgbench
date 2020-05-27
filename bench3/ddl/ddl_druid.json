@@ -1,0 +1,14 @@
+{
+    "dimensions": [
+        {"name": "device_id", "type": "string"},
+        {"name": "device_name", "type": "string"},
+        {"name": "device_type", "type": "string"},
+        {"name": "device_floor", "type": "long"},
+        {"name": "event_type", "type": "string"},
+        {"name": "event_unit", "type": "string"},
+        {"name": "event_value", "type": "float"}
+    ],
+    "intervals": [
+        "2017-09-06/2019-12-03"
+    ]
+}

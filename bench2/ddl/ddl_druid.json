@@ -1,0 +1,11 @@
+{
+    "dimensions": [
+        {"name": "client_ip", "type": "string"},
+        {"name": "request", "type": "string"},
+        {"name": "status_code", "type": "long"},
+        {"name": "object_size", "type": "long"}
+    ],
+    "intervals": [
+        "2011-12-31/2013-01-01"
+    ]
+}
