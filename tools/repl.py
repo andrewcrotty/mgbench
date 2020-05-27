@@ -189,7 +189,7 @@ def main():
                     sql = input
                 sql = sql.strip().replace(';', '')
 
-                if sql[:6].lower() == 'create' or sql[0] == '{':
+                if sql[:6].lower() == 'create' or input.split()[1][-4:] == 'json':
                     run(lambda: system.create(sql))
                 else:
                     run(lambda: system.query(sql))
