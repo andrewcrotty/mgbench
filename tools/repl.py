@@ -13,8 +13,6 @@ from tableauhyperapi import CreateMode
 from tableauhyperapi import HyperProcess
 from tableauhyperapi import Telemetry
 
-#cmds = WordCompleter(['load', 'run'])
-
 """
 style = Style.from_dict({
     'completion-menu.completion': 'bg:#008888 #ffffff',
@@ -24,9 +22,8 @@ style = Style.from_dict({
 })
 """
 
-
 class System:
-    def create(self, sql):
+    def create(self, ddl):
         raise NotImplementedError
 
     def load(self, filename):
@@ -37,45 +34,19 @@ class System:
 
 
 class Druid(System):
+    LOAD_URL = 'http://localhost:8081/druid/indexer/v1/task'
+    QUERY_URL = 'http://localhost:8888/druid/v2/sql'
+
     def __init__(self):
         self.parallel = 48
         self.index = True
         self.bitmap = 'concise' #concise, roaring
         self.compress = 'uncompressed' #uncompressed, lz4, lzf
         self.encode = 'longs' #longs, auto
+        self.schema = None
 
-    def create(self, sql):
-        """
-        self.ddl = [
-
-            {'name': 'machine_name', 'createBitmapIndex': self.index},
-            {'name': 'machine_group', 'createBitmapIndex': self.index},
-            {'name': 'cpu_idle', 'type': 'float'},
-            {'name': 'cpu_nice', 'type': 'float'},
-            {'name': 'cpu_system', 'type': 'float'},
-            {'name': 'cpu_user', 'type': 'float'},
-            {'name': 'cpu_wio', 'type': 'float'},
-            {'name': 'disk_free', 'type': 'float'},
-            {'name': 'disk_total', 'type': 'float'},
-            {'name': 'part_max_used', 'type': 'float'},
-            {'name': 'load_fifteen', 'type': 'float'},
-            {'name': 'load_five', 'type': 'float'},
-            {'name': 'load_one', 'type': 'float'},
-            {'name': 'mem_buffers', 'type': 'float'},
-            {'name': 'mem_cached', 'type': 'float'},
-            {'name': 'mem_free', 'type': 'float'},
-            {'name': 'mem_shared', 'type': 'float'},
-            {'name': 'swap_free', 'type': 'float'},
-            {'name': 'bytes_in', 'type': 'float'},
-            {'name': 'bytes_out', 'type': 'float'}
-        ]
-        """
-        self.ddl = [
-        {'name': 'client_ip', 'createBitmapIndex': self.index},
-        {'name': 'request', 'createBitmapIndex': self.index},
-        {'name': 'status_code', 'type': 'long'},
-        {'name': 'object_size', 'type': 'long'}
-        ]
+    def create(self, ddl):
+        self.schema = json.loads(ddl)
         return []
 
     def load(self, filename):
@@ -89,15 +60,12 @@ class Druid(System):
                         'column': 'log_time'
                     },
                     'dimensionsSpec': {
-                        'dimensions': self.ddl
+                        'dimensions': self.schema['dimensions']
                     },
                     'metricsSpec': [],
                     'granularitySpec': {
                         'rollup': 'false',
-                        'intervals': [
-                            #'2016-11-01/2017-01-12'
-                            '2011-12-31/2013-01-01'
-                        ]
+                        'intervals': self.schema['intervals']
                     }
                 },
                 'ioConfig': {
@@ -124,8 +92,8 @@ class Druid(System):
                 }
             }
         }
-        print(json.dumps(spec))
-        response = requests.post('http://localhost:8081/druid/indexer/v1/task', json=spec)
+        print(json.dumps(self.spec))
+        response = requests.post(Druid.LOAD_URL, json=self.spec)
         print(json.dumps(response.json()))
         return []
 
@@ -141,7 +109,7 @@ class Druid(System):
             }
         }
         print(json.dumps(query))
-        response = requests.post('http://localhost:8888/druid/v2/sql', json=query)
+        response = requests.post(Druid.QUERY_URL, json=query)
         print(json.dumps(response.json()))
         return response
 
@@ -151,11 +119,11 @@ class Hyper(System):
         self.db = HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU)
         self.conn = Connection(self.db.endpoint, filename, CreateMode.CREATE)
 
-    def create(self, sql):
-        count = self.conn.execute_command(sql)
+    def create(self, ddl):
+        count = self.conn.execute_command(ddl)
         return [count]
 
-    def load(self, fname):
+    def load(self, filename):
         count = self.conn.execute_command("COPY logs FROM '" + fname + "' WITH (FORMAT csv, HEADER)")
         return [count]
 
@@ -167,16 +135,16 @@ class Hyper(System):
 class SparkSQL(System):
     def __init__(self):
         self.spark = SparkSession.builder.master('local[48]').getOrCreate()
-        self.ddl = None
-        self.ts_fmt = 'yyyy-MM-dd HH:mm:ss'
+        self.schema = None
+        #self.ts_fmt = 'yyyy-MM-dd HH:mm:ss'
 
-    def create(self, sql):
-        self.ddl = sql.split('(')[1].split(')')[0].replace('\n', '')
+    def create(self, ddl):
+        self.schema = sql.split('(')[1].split(')')[0].replace('\n', '')
         return []
 
     def load(self, filename):
-        self.spark.read.csv(filename, schema=self.ddl, header=True,
-                timestampFormat=self.ts_fmt).createOrReplaceTempView('logs')
+        df = self.spark.read.csv(filename, schema=self.ddl, header=True)
+        df.createOrReplaceTempView('logs')
         self.spark.catalog.cacheTable('logs')
         count = self.spark.sql('SELECT COUNT(*) FROM logs').collect()
         return [count]
@@ -188,9 +156,9 @@ class SparkSQL(System):
 
 def run(cmd):
     start = time.time()
-    result = cmd()
+    rows = [row for row in cmd()]
     stop = time.time()
-    for row in result:
+    for row in rows:
         print(row)
     print('Time:', str(stop - start))
 
