@@ -124,7 +124,7 @@ class Hyper(System):
         return [count]
 
     def load(self, filename):
-        count = self.conn.execute_command("COPY logs FROM '" + fname + "' WITH (FORMAT csv, HEADER)")
+        count = self.conn.execute_command("COPY logs FROM '" + filename + "' WITH (FORMAT csv, HEADER)")
         return [count]
 
     def query(self, sql):
