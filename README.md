@@ -9,7 +9,7 @@ A new analytical benchmark for machine-generated log data.
 
 ## Preliminary Results
 
-All experiments were conducted on a `r5.12xlarge` EC2 instance (48 vCPU, 384 GiB memory).
+All experiments were conducted on a `r5.12xlarge` EC2 instance (48 vCPU, 384 GiB memory). Times are reported in seconds.
 
 ### Benchmark 1
 
