@@ -1,3 +1,5 @@
+-- Q1.5: Which externally reachable VMs have run low on memory?
+
 SELECT machine_name,
        dt,
        MIN(mem_free) AS mem_free_min

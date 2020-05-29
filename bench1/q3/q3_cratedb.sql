@@ -1,3 +1,5 @@
+-- Q1.3: What are the hourly average metrics during the past 10 days for a specific workstation?
+
 SELECT dt,
        hr,
        AVG(load_fifteen) AS load_fifteen_avg,

@@ -1,3 +1,5 @@
+-- Q1.2: Which computer lab machines have been offline in the past day?
+
 SELECT machine_name,
        log_time
 FROM logs

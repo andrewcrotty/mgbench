@@ -1,3 +1,5 @@
+-- Q1.1: What is the CPU/network utilization for each web server since midnight?
+
 SELECT machine_name,
        MIN(cpu) AS cpu_min,
        MAX(cpu) AS cpu_max,

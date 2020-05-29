@@ -1,3 +1,5 @@
+-- Q1.4: Over a 1-month period, how often was each server blocked on disk I/O?
+
 SELECT machine_name,
        COUNT(*) AS spikes
 FROM logs

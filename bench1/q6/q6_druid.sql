@@ -1,3 +1,5 @@
+-- Q1.6: What is the total hourly network traffic across all file servers?
+
 SELECT dt,
        hr,
        SUM(net_in) AS net_in_sum,
