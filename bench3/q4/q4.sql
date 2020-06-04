@@ -1,3 +1,5 @@
+-- Q3.4: Over the past 6 months, how frequently was each door opened?
+
 SELECT device_name,
        device_floor,
        COUNT(*) AS ct

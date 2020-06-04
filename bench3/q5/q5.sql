@@ -1,3 +1,5 @@
+-- Q3.5: Where in the building do large temperature variations occur in winter and summer?
+
 WITH temperature AS (
   SELECT dt,
          device_name,

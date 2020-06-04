@@ -1,3 +1,5 @@
+-- Q3.3: For each classroom, what is the best weekday and time to schedule maintenance this semester?
+
 WITH room_use AS (
   SELECT dow,
          hr,

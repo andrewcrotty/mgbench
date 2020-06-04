@@ -1,3 +1,5 @@
+-- Q3.1: Did the indoor temperature reach freezing over the weekend?
+
 SELECT *
 FROM logs
 WHERE event_type = 'temperature'

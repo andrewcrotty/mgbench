@@ -1,3 +1,5 @@
+-- Q3.2: In the past month, which devices have consumed more than double the hourly power average?
+
 WITH power_hourly AS (
   SELECT EXTRACT(HOUR FROM log_time) AS hr,
          device_id,
@@ -40,4 +42,4 @@ FROM (
            device_category,
            device_floor
 ) AS s
-WHERE power_avg >= category_power_avg * 2.0;
+WHERE power_avg > category_power_avg * 2;

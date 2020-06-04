@@ -1,3 +1,5 @@
+-- Q3.6: For each device category, what are the monthly power consumption metrics?
+
 SELECT yr,
        mo,
        SUM(coffee_hourly_avg) AS coffee_monthly_sum,
