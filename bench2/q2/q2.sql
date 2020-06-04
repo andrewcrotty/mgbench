@@ -1,3 +1,5 @@
+-- Q2.2: During a specific 2-week period, was the user password file leaked?
+
 SELECT *
 FROM logs
 WHERE status_code >= 200

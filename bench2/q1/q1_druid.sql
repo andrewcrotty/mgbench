@@ -1,3 +1,5 @@
+-- Q2.1: Which requests have caused server errors within the past 2 weeks?
+
 SELECT *
 FROM logs
 WHERE status_code >= 500

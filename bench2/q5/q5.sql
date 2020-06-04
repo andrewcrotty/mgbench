@@ -1,9 +1,11 @@
-SELECT mo,
+-- Q2.5: What are the daily unique visitors?
+
+SELECT dt,
        COUNT(DISTINCT client_ip)
 FROM (
-  SELECT EXTRACT(MONTH FROM log_time) AS mo,
+  SELECT CAST(log_time AS DATE) AS dt,
          client_ip
   FROM logs
 ) AS r
-GROUP BY mo
-ORDER BY mo;
+GROUP BY dt
+ORDER BY dt;

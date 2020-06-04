@@ -1,3 +1,5 @@
+-- Q2.4: During the last 3 months, which clients have made an excessive number of requests?
+
 SELECT client_ip,
        COUNT(*) AS num_requests
 FROM logs

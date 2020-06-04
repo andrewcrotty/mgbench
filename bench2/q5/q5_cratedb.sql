@@ -3,7 +3,7 @@
 SELECT dt,
        COUNT(DISTINCT client_ip)
 FROM (
-  SELECT CAST(__time AS DATE) AS dt,
+  SELECT DATE_TRUNC('day', log_time) AS dt,
          client_ip
   FROM logs
 ) AS r

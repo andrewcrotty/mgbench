@@ -1,5 +1,7 @@
+-- Q2.3: What was the average path depth for top-level requests in the past month?
+
 SELECT top_level,
-       AVG(CHAR_LENGTH(request) - CHAR_LENGTH(REGEXP_REPLACE(request, '/', '', 'g'))) AS depth
+       AVG(CHAR_LENGTH(request) - CHAR_LENGTH(REGEXP_REPLACE(request, '/', '', 'g'))) AS depth_avg
 FROM (
   SELECT SUBSTR(request, 1, len + 1) AS top_level,
          request
