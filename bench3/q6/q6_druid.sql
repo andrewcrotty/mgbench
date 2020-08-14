@@ -24,10 +24,10 @@ FROM (
            EXTRACT(YEAR FROM __time) AS yr,
            EXTRACT(MONTH FROM __time) AS mo,
            EXTRACT(HOUR FROM __time) AS hr,
-           CASE WHEN device_name LIKE 'coffee%' THEN event_value ELSE 0 END AS coffee,
-           CASE WHEN device_name LIKE 'printer%' THEN event_value ELSE 0 END AS printer,
-           CASE WHEN device_name LIKE 'projector%' THEN event_value ELSE 0 END AS projector,
-           CASE WHEN device_name LIKE 'vending%' THEN event_value ELSE 0 END AS vending
+           CASE WHEN device_name LIKE 'coffee%' THEN event_value END AS coffee,
+           CASE WHEN device_name LIKE 'printer%' THEN event_value END AS printer,
+           CASE WHEN device_name LIKE 'projector%' THEN event_value END AS projector,
+           CASE WHEN device_name LIKE 'vending%' THEN event_value END AS vending
     FROM logs
     WHERE device_type = 'meter'
   ) AS r
