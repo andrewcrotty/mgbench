@@ -1,7 +1,7 @@
 CREATE TABLE logs (
   log_time      DateTime,
-  machine_name  String,
-  machine_group String,
+  machine_name  LowCardinality(String),
+  machine_group LowCardinality(String),
   cpu_idle      Nullable(Float32),
   cpu_nice      Nullable(Float32),
   cpu_system    Nullable(Float32),
@@ -22,4 +22,4 @@ CREATE TABLE logs (
   bytes_out     Nullable(Float32)
 )
 ENGINE = MergeTree()
-ORDER BY log_time;
+ORDER BY (machine_group, machine_name, log_time);

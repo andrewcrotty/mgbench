@@ -1,13 +1,12 @@
 CREATE TABLE logs (
-  log_time     DateTime,
-  log_time_ms  UInt16,
+  log_time     DateTime64,
   device_id    FixedString(15),
-  device_name  String,
-  device_type  String,
+  device_name  LowCardinality(String),
+  device_type  LowCardinality(String),
   device_floor UInt8,
-  event_type   String,
+  event_type   LowCardinality(String),
   event_unit   FixedString(1),
   event_value  Nullable(Float32)
 )
 ENGINE = MergeTree()
-ORDER BY log_time;
+ORDER BY (event_type, log_time);
